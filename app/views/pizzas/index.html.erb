@@ -1,1 +1,8 @@
-<h1>Welcome!</h1>
+<h1><%= t(:pizza_manager) %></h1>
+<p>
+  <ul>
+    <% @pizzas.each do |pizza| %>
+      <li><%= pizza.name %></li>
+    <% end %>
+  </ul>
+</p>
