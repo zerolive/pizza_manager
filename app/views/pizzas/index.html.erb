@@ -2,7 +2,7 @@
 <p>
   <ul>
     <% @pizzas.each do |pizza| %>
-      <li><%= pizza.name %></li>
+      <li><%= link_to(pizza.name, pizza_path(pizza.id)) %></li>
     <% end %>
   </ul>
 </p>
