@@ -2,6 +2,10 @@
 
 An Web application for manage pizza's ingredients and its prize
 
+## Project planification
+
+You can find the planification of this project in the follow [trello.](https://trello.com/b/XP0VRpMB/pizza-manager)
+
 # Repository
 
 You can find the application's code in github on this [repository.](https://github.com/zerolive/pizza_manager)
