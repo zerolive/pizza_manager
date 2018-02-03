@@ -6,6 +6,5 @@ services:
       - .:/pizza
     ports:
       - 3000:3000
-    command: rails db:migrate
-    command: rails db:seed
+    command: rake development:prepare
     command: rails s -b '0.0.0.0'
