@@ -3,7 +3,7 @@
 <p>
   <ul>
     <% @ingredients.each do |ingredient| %>
-      <li><%= ingredient.name %></li>
+      <li><%= "#{ingredient.name} - #{ingredient.price}" %></li>
     <% end %>
   </ul>
 </p>
