@@ -1,0 +1,11 @@
+version: '3'
+services:
+  pizza:
+    build: .
+    volumes:
+      - .:/pizza
+    ports:
+      - 3000:3000
+    command: rails db:migrate
+    command: rails db:seed
+    command: rails s -b '0.0.0.0'
