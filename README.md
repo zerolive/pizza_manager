@@ -6,6 +6,11 @@ An Web application for manage pizza's ingredients and its prize
 
 You can find the planification of this project in the follow [trello.](https://trello.com/b/XP0VRpMB/pizza-manager)
 
+I'd have to take some decisions about the project by my own, like:
+
+- People only can add the same ingredient one time.
+- The ingredient list are sorted by name.
+
 # Repository
 
 You can find the application's code in github on this [repository.](https://github.com/zerolive/pizza_manager)
