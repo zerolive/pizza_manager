@@ -35,15 +35,38 @@ describe 'Pizza' do
   end
 
   it 'can remove ingredients' do
-    ingredient_name = 'Tomato'
-    pizza = prepare_pizza
+    ingredient = 'Tomato'
+    pizza = prepare_pizza(ingredient_name: ingredient)
 
     visit root_path
     click_on(pizza.name)
     click_on('Remove')
 
     expect(page).to have_content(pizza.name)
-    expect(page).not_to have_content(ingredient_name)
+    expect(page).not_to have_content(ingredient)
+  end
+
+  it 'can remove different ingredients' do
+    ingredient = 'Tomato'
+    another_ingredient = 'Onion'
+    pizza = prepare_pizza(ingredient_name: ingredient)
+    ingredient = Ingredient.new(name: another_ingredient, price: 1.0)
+    ingredient.save
+    recipe = Recipe.new(pizza: pizza.id, ingredient: ingredient.id)
+    recipe.save
+
+    visit root_path
+    click_on(pizza.name)
+    remove(ingredient.id)
+    click_on('Remove')
+
+    expect(page).to have_content(pizza.name)
+    expect(page).not_to have_content(ingredient)
+    expect(page).not_to have_content(another_ingredient)
+  end
+
+  def remove(id)
+    find("##{id}").click
   end
 
   def prepare_pizza(pizza_name:'The Fun Pizza', ingredient_name:'Tomato', ingredient_price:1.0)
