@@ -11,7 +11,7 @@ class PizzasController < ApplicationController
     default_ingredients = Recipe.ingredients_for(@pizza.id)
     session[:ingredients] = default_ingredients
 
-    @ingredients = Ingredient.find(default_ingredients)
+    @ingredients = Ingredient.find_and_sort(default_ingredients)
     @pizza_price = PreparedPizza.calculate_price(@ingredients)
   end
 
@@ -28,7 +28,7 @@ class PizzasController < ApplicationController
   end
 
   def custom_pizza
-    @ingredients = Ingredient.find(ingredients)
+    @ingredients = Ingredient.find_and_sort(ingredients)
     @pizza_price = PreparedPizza.calculate_price(@ingredients)
   end
 

@@ -47,4 +47,17 @@ describe Ingredient do
     expect(errors.count).to eq(1)
     expect(errors.messages[:name]).to eq(["has already been taken"])
   end
+
+  it 'returns the ingredients sorted by name' do
+    a_ingredient = Ingredient.new(name: 'A', price: 1.0)
+    a_ingredient.save
+    b_ingredient = Ingredient.new(name: 'B', price: 1.0)
+    b_ingredient.save
+    ingredients_list = [b_ingredient.id, a_ingredient.id]
+
+    sorted_ingredients = Ingredient.find_and_sort(ingredients_list)
+
+    ingredients = Ingredient.order(:name).find(ingredients_list)
+    expect(sorted_ingredients).to eq(ingredients)
+  end
 end
