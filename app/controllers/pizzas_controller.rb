@@ -39,7 +39,7 @@ class PizzasController < ApplicationController
   end
 
   def ingredients
-    session[:ingredients]
+    session[:ingredients] || []
   end
 
   def get_ingredient_id
