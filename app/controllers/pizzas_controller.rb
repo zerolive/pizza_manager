@@ -7,21 +7,17 @@ class PizzasController < ApplicationController
 
   def show
     default_ingredients = Recipe.ingredients_for(@pizza.id)
+    session[:ingredients] = default_ingredients
 
     @ingredients = Ingredient.find(default_ingredients)
     @pizza_price = PreparedPizza.calculate_price(@ingredients)
   end
 
   def remove_ingredient
-    removed = session[:removed] || []
-    ingredients = Recipe.ingredients_for(@pizza.id)
+    ingredients = session[:ingredients]
+    ingredient = params[:ingredient].to_i
 
-    removed << params[:ingredient].to_i
-    session[:removed] = removed
-
-    removed.each do |ingredient|
-      ingredients.delete(ingredient)
-    end
+    ingredients.delete(ingredient)
 
     @ingredients = Ingredient.find(ingredients)
     @pizza_price = PreparedPizza.calculate_price(@ingredients)
