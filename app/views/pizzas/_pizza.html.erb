@@ -1,0 +1,21 @@
+<p>
+  <%= form_tag(add_ingredient_path(@pizza.id)) do %>
+    <%= collection_select('ingredient', nil, @new_ingredients, 'id', 'name') %>
+    <%= submit_tag t(:add) %>
+  <% end %>
+</p>
+
+<p>
+  <ul>
+    <% @ingredients.each do |ingredient| %>
+      <li>
+        <%= "#{ingredient.name} - #{ingredient.price} - " %>
+        <%= link_to(t(:remove), remove_ingredient_path(@pizza.id, ingredient.id), { method: :post, id: ingredient.id}) %>
+      </li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <%= "#{t(:total)}: #{@pizza_price}" %>
+</p>
