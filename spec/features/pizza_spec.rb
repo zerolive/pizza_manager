@@ -34,6 +34,18 @@ describe 'Pizza' do
     expect(page).to have_content("Total: #{final_price}")
   end
 
+  it 'can remove ingredients' do
+    ingredient_name = 'Tomato'
+    pizza = prepare_pizza
+
+    visit root_path
+    click_on(pizza.name)
+    click_on('Remove')
+
+    expect(page).to have_content(pizza.name)
+    expect(page).not_to have_content(ingredient_name)
+  end
+
   def prepare_pizza(pizza_name:'The Fun Pizza', ingredient_name:'Tomato', ingredient_price:1.0)
     ingredient = Ingredient.new(
       name: ingredient_name,
