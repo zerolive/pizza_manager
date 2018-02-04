@@ -9,7 +9,7 @@
   <ul>
     <% @ingredients.each do |ingredient| %>
       <li>
-        <%= "#{ingredient.name} - #{ingredient.price} - " %>
+        <%= "#{ingredient.name} - #{with_currency(ingredient.price)} - " %>
         <%= link_to(t(:remove), remove_ingredient_path(@pizza.id, ingredient.id), { method: :post, id: ingredient.id}) %>
       </li>
     <% end %>
@@ -17,7 +17,7 @@
 </p>
 
 <p>
-  <%= "#{t(:total)}: #{@pizza_price}" %>
+  <%= "#{t(:total)}: #{with_currency(@pizza_price)}" %>
 </p>
 
 <p>
