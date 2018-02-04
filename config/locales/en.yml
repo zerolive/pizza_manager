@@ -2,3 +2,5 @@ en:
   total: "Total"
   pizza_manager: "Pizza Manager"
   remove: 'Remove'
+  add: 'Add'
+  add_ingredient: 'Add Ingredients'

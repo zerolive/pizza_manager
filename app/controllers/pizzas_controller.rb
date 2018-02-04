@@ -1,5 +1,5 @@
 class PizzasController < ApplicationController
-  before_action :set_pizza, only: [:show, :remove_ingredient]
+  before_action :set_pizza, only: [:show, :remove_ingredient, :add_ingredient]
 
   def index
     @pizzas = PreparedPizza.all
@@ -25,9 +25,21 @@ class PizzasController < ApplicationController
     render :show
   end
 
+  def add_ingredient
+    ingredients = session[:ingredients]
+    ingredient = params["Add Ingredients"].to_i
+
+    ingredients << ingredient
+
+    @ingredients = Ingredient.find(ingredients)
+    @pizza_price = PreparedPizza.calculate_price(@ingredients)
+
+    render :show
+  end
+
   private
 
   def set_pizza
-    @pizza = PreparedPizza.find(params[:id])
+    @pizza = PreparedPizza.find(params[:pizza])
   end
 end

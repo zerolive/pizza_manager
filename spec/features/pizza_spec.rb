@@ -43,7 +43,7 @@ describe 'Pizza' do
     click_on('Remove')
 
     expect(page).to have_content(pizza.name)
-    expect(page).not_to have_content(ingredient)
+    expect(page).not_to have_content("#{ingredient} -")
   end
 
   it 'can remove different ingredients' do
@@ -61,8 +61,21 @@ describe 'Pizza' do
     click_on('Remove')
 
     expect(page).to have_content(pizza.name)
-    expect(page).not_to have_content(ingredient)
-    expect(page).not_to have_content(another_ingredient)
+    expect(page).not_to have_content("#{ingredient} -")
+    expect(page).not_to have_content("#{another_ingredient} -")
+  end
+
+  it 'can add ingredients' do
+    pizza = PreparedPizza.new(name: 'New Pizza')
+    pizza.save
+    ingredient = Ingredient.new(name: 'Ingredient', price: 1.0)
+    ingredient.save
+
+    visit root_path
+    click_on(pizza.name)
+    click_on('Add')
+
+    expect(page).to have_content(ingredient.name)
   end
 
   def remove(id)

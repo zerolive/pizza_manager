@@ -1,6 +1,13 @@
 <h1><%= @pizza.name %></h1>
 
 <p>
+  <%= form_tag(add_ingredient_path(@pizza.id)) do %>
+    <%= select_tag t(:add_ingredient), options_from_collection_for_select(Ingredient.all, "id", "name") %>
+    <%= submit_tag t(:add) %>
+  <% end %>
+</p>
+
+<p>
   <ul>
     <% @ingredients.each do |ingredient| %>
       <li>

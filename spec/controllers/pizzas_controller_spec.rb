@@ -11,7 +11,7 @@ describe PizzasController, type: :controller do
   it 'returns ok for get show' do
     pizza = PreparedPizza.new(name: 'any name')
     pizza.save
-    params = { params: { id: pizza.id } }
+    params = { params: { pizza: pizza.id } }
 
     get :show, params
 
