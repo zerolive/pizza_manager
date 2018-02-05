@@ -16,7 +16,9 @@ class PizzasController < ApplicationController
   end
 
   def remove_ingredient
-    ingredients.delete(@ingredient_id)
+    if has_ingredients?
+      ingredients.delete(@ingredient_id)
+    end
 
     redirect_to custom_path(@pizza.id)
   end
@@ -33,6 +35,10 @@ class PizzasController < ApplicationController
   end
 
   private
+
+  def has_ingredients?
+    ingredients.size > 1
+  end
 
   def set_pizza
     @pizza = PreparedPizza.find(params[:pizza])

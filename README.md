@@ -11,6 +11,7 @@ I'd have to take some decisions about the project by my own, like:
 - People only can add the same ingredient one time.
 - The ingredient list are sorted by name.
 - Right now the amounts only are available in euros.
+- Pizza has to have at least one ingredient.
 
 # Repository
 

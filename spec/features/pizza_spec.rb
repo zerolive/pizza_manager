@@ -34,7 +34,8 @@ describe 'Pizza' do
     expect(page).to have_content("Total: #{final_price}")
   end
 
-  it 'can remove ingredients' do
+  it 'can not remove the last ingredient' do
+    minimum_ingredients_warning = 'Pizza has to have at least one ingredient.'
     ingredient = 'Tomato'
     pizza = prepare_pizza(ingredient_name: ingredient)
 
@@ -43,26 +44,29 @@ describe 'Pizza' do
     click_on('Remove')
 
     expect(page).to have_content(pizza.name)
-    expect(page).not_to have_content("#{ingredient} -")
+    expect(page).to have_content(ingredient)
+    expect(page).to have_content(minimum_ingredients_warning)
   end
 
   it 'can remove different ingredients' do
-    ingredient = 'Tomato'
-    another_ingredient = 'Onion'
-    pizza = prepare_pizza(ingredient_name: ingredient)
-    ingredient = Ingredient.new(name: another_ingredient, price: 1.0)
+    pizza = prepare_pizza
+    ingredient = Ingredient.new(name: 'Onion', price: 1.0)
     ingredient.save
+    extra_ingredient = Ingredient.new(name: 'Extra', price: 1.0)
+    extra_ingredient.save
     recipe = Recipe.new(pizza: pizza.id, ingredient: ingredient.id)
+    recipe.save
+    recipe = Recipe.new(pizza: pizza.id, ingredient: extra_ingredient.id)
     recipe.save
 
     visit root_path
     click_on('Customize')
     remove(ingredient.id)
-    click_on('Remove')
+    remove(extra_ingredient.id)
 
     expect(page).to have_content(pizza.name)
-    expect(page).not_to have_content("#{ingredient} -")
-    expect(page).not_to have_content("#{another_ingredient} -")
+    expect(page).not_to have_css("##{ingredient.id}")
+    expect(page).not_to have_css("##{extra_ingredient.id}")
   end
 
   it 'can add ingredients' do

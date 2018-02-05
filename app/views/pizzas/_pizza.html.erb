@@ -9,6 +9,12 @@
     </div>
   </div>
 
+  <% if minimum?(@ingredients) %>
+    <div class="alert alert-danger" role="alert">
+      <%= t(:minimum_ingredients_warning) %>
+    </div>
+  <% end %>
+
   <h2><%= t(:ingredients) %></h2>
 
   <div class="table-responsive">
