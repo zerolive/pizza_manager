@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   get '/pizzas/:pizza' => 'pizzas#show', as: :pizza
   post '/pizzas/:pizza/remove/:ingredient' => 'pizzas#remove_ingredient', as: :remove_ingredient
   post '/pizzas/:pizza/add' => 'pizzas#add_ingredient', as: :add_ingredient
-  get '/pizzas/:pizza/custom_pizza' => 'pizzas#custom_pizza', as: :custom_pizza
+  get '/pizzas/:pizza/custom' => 'pizzas#custom', as: :custom
 end

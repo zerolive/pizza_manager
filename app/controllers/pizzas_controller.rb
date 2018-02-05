@@ -1,7 +1,7 @@
 class PizzasController < ApplicationController
-  before_action :set_pizza, only: [:show, :remove_ingredient, :add_ingredient, :custom_pizza]
+  before_action :set_pizza, only: [:show, :remove_ingredient, :add_ingredient, :custom]
   before_action :get_ingredient_id, only: [:remove_ingredient, :add_ingredient]
-  before_action :get_new_ingredients, only: [:show, :custom_pizza]
+  before_action :get_new_ingredients, only: [:show, :custom]
 
   def index
     @pizzas = PreparedPizza.all
@@ -18,16 +18,16 @@ class PizzasController < ApplicationController
   def remove_ingredient
     ingredients.delete(@ingredient_id)
 
-    redirect_to custom_pizza_path(@pizza.id)
+    redirect_to custom_path(@pizza.id)
   end
 
   def add_ingredient
     ingredients << @ingredient_id
 
-    redirect_to custom_pizza_path(@pizza.id)
+    redirect_to custom_path(@pizza.id)
   end
 
-  def custom_pizza
+  def custom
     @ingredients = Ingredient.find_and_sort(ingredients)
     @pizza_price = PreparedPizza.calculate_price(@ingredients)
   end

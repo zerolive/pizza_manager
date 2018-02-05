@@ -35,4 +35,13 @@ describe PizzasController, type: :controller do
 
     expect(response.code).to eq('302')
   end
+
+  it 'returns ok for get custom pizza' do
+    pizza = PreparedPizza.new(name: 'Any pizza')
+    pizza.save
+
+    get :custom, params: { pizza: pizza.id }
+
+    expect(response.code).to eq('200')
+  end
 end
