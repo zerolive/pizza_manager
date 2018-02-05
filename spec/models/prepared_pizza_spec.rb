@@ -29,4 +29,16 @@ describe PreparedPizza do
     expect(errors.count).to eq(1)
     expect(errors.messages[:name]).to eq(["has already been taken"])
   end
+
+  it 'can have a description' do
+    description = 'Specific description'
+    pizza = PreparedPizza.new(
+      name: 'Any name',
+      description: description
+    )
+
+    pizza.save
+
+    expect(pizza.description).to eq(description)
+  end
 end

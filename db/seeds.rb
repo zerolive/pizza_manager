@@ -5,8 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-mushroom_pizza = PreparedPizza.create(name: 'The​ ​Super​ ​Mushroom​ ​Pizza')
-fun_pizza = PreparedPizza.create(name: 'The​ ​Fun​ Pizza​')
+description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate.'
+mushroom_pizza = PreparedPizza.create(name: 'The​ ​Super​ ​Mushroom​ ​Pizza', description: description)
+fun_pizza = PreparedPizza.create(name: 'The​ ​Fun​ Pizza​', description: description)
 
 tomato = Ingredient.create(name: 'Tomato​', price: 0.5)
 mushrooms = Ingredient.create(name: 'Sliced​ ​Mushrooms​', price: 0.5)

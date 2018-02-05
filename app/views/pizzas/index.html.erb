@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-7">
       <h3><%= pizza.name %></h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate.</p>
+      <p><%= pizza.description %></p>
       <%= link_to(t(:customize), pizza_path(pizza.id), class: "btn btn-success") %>
     </div>
   </div>
