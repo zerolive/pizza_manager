@@ -4,7 +4,7 @@
 <% @pizzas.each do |pizza| %>
   <div class="row">
     <div class="col-md-5">
-      <%= image_tag("pizza.png", class: "img-fluid rounded mb-3 mb-md-0") %>
+      <%= image_tag(pizza.image, class: "img-fluid rounded mb-3 mb-md-0") %>
     </div>
     <div class="col-md-7">
       <h3><%= pizza.name %></h3>

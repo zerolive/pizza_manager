@@ -41,4 +41,16 @@ describe PreparedPizza do
 
     expect(pizza.description).to eq(description)
   end
+
+  it 'can have an image' do
+    url_image = 'image.jpg'
+    pizza = PreparedPizza.new(
+      name: 'Any name',
+      image: url_image
+    )
+
+    pizza.save
+
+    expect(pizza.image).to eq(url_image)
+  end
 end
