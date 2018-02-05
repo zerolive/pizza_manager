@@ -7,7 +7,7 @@ describe 'Pizza' do
     pizza = prepare_pizza(ingredient_name: ingredient_name)
 
     visit root_path
-    click_on(pizza.name)
+    click_on('Customize')
 
     expect(page).to have_content(ingredient_name)
   end
@@ -17,7 +17,7 @@ describe 'Pizza' do
     pizza = prepare_pizza(ingredient_price: ingredient_price)
 
     visit root_path
-    click_on(pizza.name)
+    click_on('Customize')
 
     expect(page).to have_content(ingredient_price)
   end
@@ -28,7 +28,7 @@ describe 'Pizza' do
     pizza = prepare_pizza(ingredient_price: ingredient_price)
 
     visit root_path
-    click_on(pizza.name)
+    click_on('Customize')
 
     final_price = ingredient_price * manufacture_cost
     expect(page).to have_content("Total: #{final_price}")
@@ -39,7 +39,7 @@ describe 'Pizza' do
     pizza = prepare_pizza(ingredient_name: ingredient)
 
     visit root_path
-    click_on(pizza.name)
+    click_on('Customize')
     click_on('Remove')
 
     expect(page).to have_content(pizza.name)
@@ -56,7 +56,7 @@ describe 'Pizza' do
     recipe.save
 
     visit root_path
-    click_on(pizza.name)
+    click_on('Customize')
     remove(ingredient.id)
     click_on('Remove')
 
@@ -72,7 +72,7 @@ describe 'Pizza' do
     ingredient.save
 
     visit root_path
-    click_on(pizza.name)
+    click_on('Customize')
     click_on('Add')
 
     expect(page).to have_content(ingredient.name)

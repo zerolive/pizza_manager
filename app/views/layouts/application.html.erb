@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pizza</title>
+    <title><%= t(:pizza_manager) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'pizza.ico' %>
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+      <div class="container">
+        <a href="/" class="navbar-brand">
+          <h1>
+            <%= t(:pizza_manager) %>
+          </h1>
+        </a>
+      </div>
+    </nav>
+    <div class="container margins">
     <%= yield %>
+    </div>
+    <footer class="py-5 bg-danger">
+      <div class="container">
+        <p class="m-0 text-center text-white">
+          <%= t(:enjoy_your_pizza) %>
+        </p>
+      </div>
+    </footer>
   </body>
 </html>

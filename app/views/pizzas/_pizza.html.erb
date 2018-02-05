@@ -1,25 +1,46 @@
-<p>
-  <%= form_tag(add_ingredient_path(@pizza.id)) do %>
-    <%= collection_select('ingredient', nil, @new_ingredients, 'id', 'name') %>
-    <%= submit_tag t(:add) %>
-  <% end %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <%= form_tag(add_ingredient_path(@pizza.id), class: "float-left") do %>
+        <%= collection_select('ingredient', nil, @new_ingredients, :id, :name, {}, class: "form-control") %>
+        <%= submit_tag t(:add), class: 'btn btn-success' %>
+      <% end %>
+      <%= link_to(t(:reset_ingredients), pizza_path(@pizza.id), class: "float-right btn btn-danger") %>
+    </div>
+  </div>
 
-<p>
-  <ul>
-    <% @ingredients.each do |ingredient| %>
-      <li>
-        <%= "#{ingredient.name} - #{with_currency(ingredient.price)} - " %>
-        <%= link_to(t(:remove), remove_ingredient_path(@pizza.id, ingredient.id), { method: :post, id: ingredient.id}) %>
-      </li>
-    <% end %>
-  </ul>
-</p>
+  <h2><%= t(:ingredients) %></h2>
 
-<p>
-  <%= "#{t(:total)}: #{with_currency(@pizza_price)}" %>
-</p>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t(:ingredient) %></th>
+          <th><%= t(:price) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ingredients.each do |ingredient| %>
+        <tr>
+          <td><%= "#{ingredient.name}: " %></td>
+          <td><%= "#{with_currency(ingredient.price)}" %></td>
+          <td><%= link_to(t(:remove), remove_ingredient_path(@pizza.id, ingredient.id), { method: :post, id: ingredient.id }) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="float-right"><%= "#{t(:total)}:" %></td>
+          <td><%= "#{with_currency(@pizza_price)}" %></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="text-center"><%= "(#{t(:manufacture_price_explanation)})" %></div>
+  </div>
+</div>
 
-<p>
+<div class="text-center">
   <%= link_to(t(:back), root_path) %>
-</p>
+</div>

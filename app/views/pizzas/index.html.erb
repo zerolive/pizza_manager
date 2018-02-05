@@ -1,8 +1,15 @@
-<h1 class="my-4"><%= t(:pizza_manager) %></h1>
-<p>
-  <ul>
-    <% @pizzas.each do |pizza| %>
-      <li><%= link_to(pizza.name, pizza_path(pizza.id)) %></li>
-    <% end %>
-  </ul>
-</p>
+<h2 class="my-4"><%= t(:chosse_your_pizza) %>
+  <small><%= t(:and_do_it_to_your_liking) %></small>
+</h2>
+<% @pizzas.each do |pizza| %>
+  <div class="row">
+    <div class="col-md-5">
+      <%= image_tag("pizza.png", class: "img-fluid rounded mb-3 mb-md-0") %>
+    </div>
+    <div class="col-md-7">
+      <h3><%= pizza.name %></h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate.</p>
+      <%= link_to(t(:customize), pizza_path(pizza.id), class: "btn btn-success") %>
+    </div>
+  </div>
+<% end %>
