@@ -82,6 +82,23 @@ describe 'Pizza' do
     expect(page).to have_content(ingredient.name)
   end
 
+  it 'can add only unused ingredients' do
+    ingredient_name = 'Tomato'
+    extra_ingredient_name = 'Onion'
+    prepare_pizza(ingredient_name: ingredient_name)
+    ingredient = Ingredient.new(
+      name: extra_ingredient_name,
+      price: 1.0
+    )
+    ingredient.save
+
+    visit root_path
+    click_on('Customize')
+
+    expect(page).to have_content(extra_ingredient_name, count: 1)
+    expect(page).to have_content(ingredient_name, count: 1)
+  end
+
   def remove(id)
     find("##{id}").click
   end

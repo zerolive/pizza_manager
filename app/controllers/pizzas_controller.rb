@@ -11,6 +11,7 @@ class PizzasController < ApplicationController
     default_ingredients = Recipe.ingredients_for(@pizza.id)
     session[:ingredients] = default_ingredients
 
+    @unused_ingredients = unused_ingredients_from(default_ingredients)
     @ingredients = Ingredient.find_and_sort(default_ingredients)
     @pizza_price = PreparedPizza.calculate_price(@ingredients)
   end
@@ -30,11 +31,18 @@ class PizzasController < ApplicationController
   end
 
   def custom
+    @unused_ingredients = unused_ingredients_from(ingredients)
     @ingredients = Ingredient.find_and_sort(ingredients)
     @pizza_price = PreparedPizza.calculate_price(@ingredients)
   end
 
   private
+
+  def unused_ingredients_from(ingredients)
+    @new_ingredients.select do |new_ingredient|
+      !ingredients.include?(new_ingredient.id)
+    end
+  end
 
   def has_ingredients?
     ingredients.size > 1
@@ -55,6 +63,6 @@ class PizzasController < ApplicationController
   end
 
   def get_new_ingredients
-    @new_ingredients = Ingredient.all
+    @new_ingredients = Ingredient.all.to_a
   end
 end
