@@ -60,4 +60,15 @@ describe Ingredient do
     ingredients = Ingredient.order(:name).find(ingredients_list)
     expect(sorted_ingredients).to eq(ingredients)
   end
+
+  it 'retrieves a list of unused ingredients' do
+    unused = Ingredient.new(name: 'Unused', price: 1.0)
+    unused.save
+    used = Ingredient.new(name: 'Used', price: 1.0)
+    used.save
+
+    retrieved_unused = Ingredient.unused([used.id])
+
+    expect(retrieved_unused).to eq([unused])
+  end
 end
